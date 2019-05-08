@@ -3,12 +3,34 @@ import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Navigator extends Component {
-    render() {
-        return (
-            <div>
-              <nav className="navbar navbar-expand-lg navbar-light bg-light">
+
+  constructor(props) {
+    super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true,
+    };
+  }
+
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  }
+
+  render() {
+    const collapsed = this.state.collapsed;
+    const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
+    const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
+      
+    return (
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" to="/">
+            Personal Trainer
+          </Link>
           <button
-            className="navbar-toggler navbar-toggler-right"
+            onClick={this.toggleNavbar} className={`${classTwo}`}
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -18,13 +40,11 @@ class Navigator extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <Link className="navbar-brand" to="/">
-            Personal Trainer
-          </Link>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <div className={`${classOne}`} id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <Link className="nav-link" to="/">
+              <li className="nav-item">
+                <Link className="nav-link" to="/CustomerList">
                   Customers
                 </Link>
               </li>
@@ -34,7 +54,7 @@ class Navigator extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/contact">
+                <Link className="nav-link" to="/Calendar">
                   Calendar
                 </Link>
               </li>

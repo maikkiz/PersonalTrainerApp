@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Switch, Link, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import TrainingsList from './components/TrainingsList';
 import CustomerList from './components/CustomerList';
 import Navigator from './components/Navigator';
+import Calendar from './components/Calendar';
 
 
 class App extends Component {
@@ -15,8 +16,9 @@ class App extends Component {
             <Navigator/>
             <Switch>
               <Route exact path="/" component={CustomerList}/>
+              <Route path="/CustomerList" component={CustomerList}></Route>
               <Route path="/TrainingsList" component={TrainingsList}/>
-              <Route render={() => <h1>Page not found</h1>}/>
+              <Route path="/Calendar" component={Calendar}/>
             </Switch>
             </div>
           </BrowserRouter>

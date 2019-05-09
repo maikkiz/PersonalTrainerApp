@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Icon } from 'antd';
-//import moment from 'moment';
+import moment from 'moment';
 
 
 class AddTraining extends Component {
@@ -29,7 +29,7 @@ class AddTraining extends Component {
 
       saveTraining = () => {
           const newTraining = {
-              date: this.state.date,
+              date: moment.utc(this.state.date).format('YYYY-MM-DD HH:mm'),
               activity: this.state.activity,
               duration: this.state.duration,
               customer: this.props.customer
@@ -59,7 +59,7 @@ class AddTraining extends Component {
               name="date"
               value={this.state.date}
               onChange={this.handleChange}
-              type="date"
+              type="datetime-local"
               fullWidth
             />
               <TextField
@@ -83,7 +83,7 @@ class AddTraining extends Component {
         
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="secondary">
               Cancel
             </Button>
             <Button onClick={this.saveTraining} color="primary">

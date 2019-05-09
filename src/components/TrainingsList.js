@@ -46,7 +46,7 @@ class TrainingsList extends Component {
             {
                 Header: "Date",
                 accessor: "date",
-                Cell: props => (<span>{moment.utc(props.date).format('DD.MM.YYYY HH:mm')}</span>)
+                Cell: props => (<span>{moment.utc(props.value).format('DD.MM.YYYY HH:mm')}</span>)
             },
             {
                 Header: "Duration",

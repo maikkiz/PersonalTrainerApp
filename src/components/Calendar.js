@@ -28,17 +28,15 @@ class Calendar extends Component {
 
         for (let i = 0; i < this.state.trainings.length; i++) {
             const event = {
-            id:i,
+            id: i,
             start: moment.utc(this.state.trainings[i].date)._d,
             end: moment.utc(this.state.trainings[i].date).add(this.state.trainings[i].duration, 'minute')._d,
             title: this.state.trainings[i].activity
             }
-            calendarEvents.push({event});
+            calendarEvents.push(event);
             console.log(calendarEvents);
         }
 
-        
-    
         return (
             <div style ={{ height: 700}}>
             <BigCalendar

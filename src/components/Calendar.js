@@ -27,16 +27,17 @@ class Calendar extends Component {
         const calendarEvents = [];
 
         for (let i = 0; i < this.state.trainings.length; i++) {
-         const event = {
-            
+            const event = {
+            id:i,
             start: moment.utc(this.state.trainings[i].date)._d,
-            end: moment.utc(this.state.trainings[i].date).add(moment.utc(this.state.trainings[i].duration, 'minute'))._d,
+            end: moment.utc(this.state.trainings[i].date).add(this.state.trainings[i].duration, 'minute')._d,
             title: this.state.trainings[i].activity
-         }
-         calendarEvents.push({event});
-         console.log(calendarEvents)
-         }
-      
+            }
+            calendarEvents.push({event});
+            console.log(calendarEvents);
+        }
+
+        
     
         return (
             <div style ={{ height: 700}}>

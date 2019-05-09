@@ -6,6 +6,7 @@ import EditCustomer from './EditCustomer';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import AddTraining from './AddTraining';
+import { Icon } from 'antd';
 //import DeleteDialog from './DeleteDialog';
 
 class CustomerList extends Component {
@@ -149,13 +150,13 @@ class CustomerList extends Component {
                 sortable: false,
                 width: 100,
                 accessor: "links[0].href",
-                Cell: ({value}) => <Button color="secondary" onClick={() => this.deleteCustomer(value)}>DELETE</Button>
+                Cell: ({value}) =>  <Button color="secondary" onClick={() => this.deleteCustomer(value)}><Icon type="delete" /></Button>
             }
         ]
         
         return (
             <div>
-                <h1>Customers</h1>
+                <h2>Customers</h2>
                 <AddCustomer addCustomer={this.addCustomer} />
                 <ReactTable filterable={true} sortable={true} data={this.state.customers} columns={columns}/>
                 <Snackbar 

@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Icon } from 'antd';
 
 class AddCustomer extends Component {
 
@@ -42,8 +43,8 @@ class AddCustomer extends Component {
     render() {
         return (
             <div>
-                    <Button style={{margin: 10}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                New Customer
+                    <Button style={{margin: 15}} variant="outlined" color="primary" size="small" onClick={this.handleClickOpen}>
+                  New Customer   <Icon type="user-add" className="icon"/> 
                 </Button>
                 <Dialog
                     open={this.state.open}

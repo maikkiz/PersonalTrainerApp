@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Icon } from 'antd';
 //import moment from 'moment';
 
 
@@ -42,8 +43,8 @@ class AddTraining extends Component {
     render() {
         return (
             <div>
-                 <Button style={{margin: 10}} color="primary" onClick={this.handleClickOpen}>
-                Add Training
+                 <Button color="primary" onClick={this.handleClickOpen}>
+                Add Training <Icon type="plus-circle" className="icon" />
                 </Button>
                 <Dialog
                     open={this.state.open}

@@ -4,7 +4,7 @@ import 'react-table/react-table.css';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-
+import { Icon } from 'antd';
 
 class TrainingsList extends Component {
 
@@ -63,12 +63,12 @@ class TrainingsList extends Component {
                 sortable: false,
                 width: 100,
                 accessor: "id",
-                Cell: ({value}) => <Button color="secondary" onClick={() => this.deleteTraining(value)}>DELETE</Button>
+                Cell: ({value}) => <Button color="secondary" onClick={() => this.deleteTraining(value)}><Icon type="delete" /></Button>
             }
         ]
         return (
             <div>
-                <h1>Trainings</h1>
+                <h2>Trainings</h2>
                 <ReactTable filterable={true} sortable={true} data={this.state.trainings} columns={columns}/>
                 <Snackbar 
                 open={this.state.open}

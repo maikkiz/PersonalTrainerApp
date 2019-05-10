@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
-moment.locale('en-gb');
-//BigCalendar.momentLocalizer(moment)
+//import { Alert } from 'antd';
 
 class Calendar extends Component {
 
@@ -28,24 +27,34 @@ class Calendar extends Component {
 
         for (let i = 0; i < this.state.trainings.length; i++) {
             const event = {
-            id: i,
-            start: moment.utc(this.state.trainings[i].date)._d,
-            end: moment.utc(this.state.trainings[i].date).add(this.state.trainings[i].duration, 'minute')._d,
-            title: this.state.trainings[i].activity
+                id: i,
+                customer: this.state.trainings[i].customer.firstname + ' ' + this.state.trainings[i].customer.lastname,
+                start: moment.utc(this.state.trainings[i].date)._d,
+                end: moment.utc(this.state.trainings[i].date).add(this.state.trainings[i].duration, 'minute')._d,
+                title: this.state.trainings[i].activity
             }
             calendarEvents.push(event);
             console.log(calendarEvents);
         }
 
         return (
-            <div style ={{ height: 700}}>
-            <BigCalendar
-            localizer={localizer}
-             events={calendarEvents}
-              views={['month', 'week', 'day']}
-              defaultDate={new Date()}
-            />
-          </div>
+            <div>
+                <h2>Calendar</h2>
+                <div className="Calendar">
+                    <BigCalendar
+                        localizer={localizer}
+                        events={calendarEvents}
+                        views={['month', 'week', 'day']}
+                        defaultDate={new Date()}
+                        onSelectEvent={event => alert(event.customer)}
+                            /*  (<Alert
+                            message= {event.customer}
+                            type="info"
+                            closable
+                            />)}*/
+                        />
+                </div>
+            </div>
         );
     }
 }

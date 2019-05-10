@@ -6,8 +6,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { Icon } from 'antd';
-import moment from 'moment';
-
 
 class AddTraining extends Component {
 
@@ -29,7 +27,7 @@ class AddTraining extends Component {
 
       saveTraining = () => {
           const newTraining = {
-              date: moment.utc(this.state.date).format('YYYY-MM-DD HH:mm'),
+              date: this.state.date + ":00.000",
               activity: this.state.activity,
               duration: this.state.duration,
               customer: this.props.customer
@@ -39,11 +37,10 @@ class AddTraining extends Component {
           this.handleClose();
       }
 
-  
     render() {
         return (
             <div>
-                 <Button color="primary" onClick={this.handleClickOpen}>
+                <Button className="Button" color="primary" onClick={this.handleClickOpen}>
                 Add Training <Icon type="plus-circle" className="icon" />
                 </Button>
                 <Dialog
@@ -51,46 +48,46 @@ class AddTraining extends Component {
                     onClose={this.handleClose}
                     aria-labelledby="form-dialog-title"
                 >
-                <DialogTitle id="form-dialog-title">New Training</DialogTitle>
-                <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="date"
-              value={this.state.date}
-              onChange={this.handleChange}
-              type="datetime-local"
-              fullWidth
-            />
-              <TextField
-              autoFocus
-              margin="dense"
-              name="activity"
-              value={this.state.activity}
-              onChange={this.handleChange}
-              label="Activity"
-              fullWidth
-            />
-              <TextField
-              autoFocus
-              margin="dense"
-              name="duration"
-              value={this.state.duration}
-              onChange={this.handleChange}
-              label="Duration"
-              fullWidth
-            />
+                  <DialogTitle id="form-dialog-title">New Training</DialogTitle>
+                  <DialogContent>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      name="date"
+                      value={this.state.date}
+                      onChange={this.handleChange}
+                      type="datetime-local"
+                      fullWidth
+                    />
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      name="activity"
+                      value={this.state.activity}
+                      onChange={this.handleChange}
+                      label="Activity"
+                      fullWidth
+                    />
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      name="duration"
+                      value={this.state.duration}
+                      onChange={this.handleChange}
+                      label="Duration"
+                      fullWidth
+                    />
         
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
-              Cancel
-            </Button>
-            <Button onClick={this.saveTraining} color="primary">
-              Save
-            </Button>
-          </DialogActions>
-        </Dialog>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} color="secondary">
+                        Cancel
+                      </Button>
+                      <Button onClick={this.saveTraining} color="primary">
+                        Save <Icon type="save" className="icon"/>
+                      </Button>
+                    </DialogActions>
+                </Dialog>
                 
             </div>
         );

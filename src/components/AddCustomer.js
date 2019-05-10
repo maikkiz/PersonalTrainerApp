@@ -43,9 +43,11 @@ class AddCustomer extends Component {
     render() {
         return (
             <div>
-                    <Button style={{margin: 15}} variant="outlined" color="primary" size="small" onClick={this.handleClickOpen}>
+              <div className="AddButton">
+                    <Button className="Button" style={{margin: 15}} variant="outlined" color="primary" onClick={this.handleClickOpen}>
                   New Customer   <Icon type="user-add" className="icon"/> 
                 </Button>
+                </div>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -122,7 +124,7 @@ class AddCustomer extends Component {
               Cancel
             </Button>
             <Button onClick={this.saveCustomer} color="primary">
-              Save
+              Save <Icon type="save" className="icon"/>
             </Button>
           </DialogActions>
         </Dialog>

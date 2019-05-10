@@ -5,8 +5,9 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { Icon } from 'antd';
 
-class DeleteDialog extends React.Component {
+class DeleteCustomer extends React.Component {
   state = {
     open: false,
   };
@@ -19,11 +20,16 @@ class DeleteDialog extends React.Component {
     this.setState({ open: false });
   };
 
+  onDelete = () => {
+    this.props.deleteAction();
+    this.handleClose();
+  }
+
   render() {
     return (
       <div>
-        <Button color="secondary" size="small" onClick={this.handleClickOpen}>
-          Delete
+        <Button color="secondary" onClick={this.handleClickOpen}>
+          <Icon type="delete" />
         </Button>
         <Dialog
           open={this.state.open}
@@ -31,17 +37,17 @@ class DeleteDialog extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Deleting"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Deleting...."}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Are you sure you want to delete this item?
+              Are you sure you want to delete?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
-              Disagree
+              Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.onDelete} color="secondary">
               Delete
             </Button>
           </DialogActions>
@@ -51,4 +57,4 @@ class DeleteDialog extends React.Component {
   }
 }
 
-export default DeleteDialog;
+export default DeleteCustomer;

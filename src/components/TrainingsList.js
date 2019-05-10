@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import moment from 'moment';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import { Icon } from 'antd';
+import DeleteDialog from './DeleteDialog';
 
 class TrainingsList extends Component {
 
@@ -24,12 +23,10 @@ class TrainingsList extends Component {
     }
 
     deleteTraining = (link) => {
-        if (window.confirm("Are you sure you want to delete this training?")) {
             fetch('https://customerrest.herokuapp.com/api/trainings/' + link, {method: "DELETE"})
             .then(res => this.fetchTrainings())
             .then(res => this.setState({open: true, message: "Training deleted"}))
             .catch(err => console.error(err))
-        }
     }
 
     handleClose = () => {
@@ -63,11 +60,12 @@ class TrainingsList extends Component {
                 sortable: false,
                 width: 100,
                 accessor: "id",
-                Cell: ({value}) => <Button color="secondary" onClick={() => this.deleteTraining(value)}><Icon type="delete" /></Button>
+                Cell: ({value}) =>  (<DeleteDialog color="secondary" deleteAction={() => this.deleteTraining(value)}> </DeleteDialog>)
+             //   Cell: ({value}) => <Button color="secondary" onClick={() => this.deleteTraining(value)}><Icon type="delete" /></Button>
             }
         ]
         return (
-            <div>
+            <div className="List">
                 <h2>Trainings</h2>
                 <ReactTable filterable={true} sortable={true} data={this.state.trainings} columns={columns}/>
                 <Snackbar 

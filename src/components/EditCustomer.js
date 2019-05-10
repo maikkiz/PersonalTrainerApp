@@ -51,7 +51,7 @@ class EditCustomer extends Component {
     render() {
         return (
             <div>
-                <Button color="primary" onClick={this.handleClickOpen}> 
+                <Button className="Button" color="primary" onClick={this.handleClickOpen}> 
                 Edit <Icon type="edit" className="icon" />
                 </Button>
                 <Dialog
@@ -127,10 +127,10 @@ class EditCustomer extends Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="secondary">
-              Cancel
+              Cancel <Icon type="stop" className="icon" />
             </Button>
             <Button onClick={this.saveCustomer} color="primary">
-              Save
+              Save <Icon type="save" className="icon"/>
             </Button>
           </DialogActions>
         </Dialog>

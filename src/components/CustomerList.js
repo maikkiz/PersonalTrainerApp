@@ -3,11 +3,10 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import AddCustomer from './AddCustomer';
 import EditCustomer from './EditCustomer';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import AddTraining from './AddTraining';
-import { Icon } from 'antd';
-//import DeleteDialog from './DeleteDialog';
+import DeleteDialog from './DeleteDialog';
+import ShowTrainings from './ShowTrainings'
 
 class CustomerList extends Component {
 
@@ -40,12 +39,10 @@ class CustomerList extends Component {
     }
 
     deleteCustomer = (link) => {
-        if (window.confirm("Are you sure you want to delete this customer?")) {
             fetch(link, {method: "DELETE"})
             .then(res => this.fetchCustomers())
             .then(res => this.setState({open: true, message: "Customer deleted"}))
             .catch(err => console.error(err))
-        }
     }
 
     editCustomer = (link, customer) => {
@@ -74,6 +71,11 @@ class CustomerList extends Component {
           .catch(err => console.error(err));
     }
 
+    showTrainings = (link) => {
+        fetch(link + '/trainings')
+        
+    }
+
     handleClose = () => {
         this.setState({open: false})
     }
@@ -81,8 +83,16 @@ class CustomerList extends Component {
     render() {
 
         const columns = [
+            {
+                Header:"",
+                filterable: false,
+                sortable: false,
+                width: 100,
+                accessor: "links[0].href",
+                Cell: ({value}) => (<ShowTrainings showTrainings={this.showTrainings} link={value} />)
+            },
             {   //yhdistetään etu ja sukunimi samaan sarakkeeseen,
-                //kommenttina toinen tapa
+                //kommenttina toinen tapa (filtteri ei toimi tässä tavassa)
                 id: "Name",
                 Header: "Name",
                 accessor: row => row.firstname + ' ' + row.lastname
@@ -150,12 +160,13 @@ class CustomerList extends Component {
                 sortable: false,
                 width: 100,
                 accessor: "links[0].href",
-                Cell: ({value}) =>  <Button color="secondary" onClick={() => this.deleteCustomer(value)}><Icon type="delete" /></Button>
+                Cell: ({value}) =>  (<DeleteDialog color="secondary" deleteAction={() => this.deleteCustomer(value)}></DeleteDialog>)
+              //  Cell: ({value}) =>  <Button color="secondary" onClick={() => this.deleteCustomer(value)}><Icon type="delete" /></Button>
             }
         ]
         
         return (
-            <div>
+            <div className="List">
                 <h2>Customers</h2>
                 <AddCustomer addCustomer={this.addCustomer} />
                 <ReactTable filterable={true} sortable={true} data={this.state.customers} columns={columns}/>
